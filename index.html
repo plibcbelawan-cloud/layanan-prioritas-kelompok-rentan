@@ -32,7 +32,6 @@
   <div class="dis-hero">
     <div class="dis-hero-inner">
       <div class="dis-eyebrow-line"></div>
-      <h1>Layanan Prioritas Kelompok Rentan</h1>
       <p class="dis-hero-desc">
         KPPBC TMP Belawan berkomitmen memberikan kemudahan akses bagi penyandang disabilitas,
         lanjut usia, ibu hamil, dan kelompok rentan lainnya. Buat janji kedatangan Anda
@@ -136,7 +135,7 @@
 
       <div class="dis-field">
         <label for="dis-kebutuhan">Kebutuhan khusus atau alat bantu saat berkunjung</label>
-        <p class="dis-field-hint">Contoh: kursi roda. </p>
+        <p class="dis-field-hint">Contoh: kursi roda.</p>
         <textarea id="dis-kebutuhan" name="kebutuhan" rows="3"></textarea>
       </div>
 
@@ -233,6 +232,26 @@
     window.open(url, "_blank", "noopener,noreferrer");
   });
 })();
+
+// ==========================================================================
+// AUTO-RESIZE UNTUK IFRAME
+// Melaporkan tinggi konten halaman ini ke halaman induk (OneWeb) yang
+// menampilkannya lewat <iframe>, supaya iframe bisa menyesuaikan tingginya
+// secara otomatis tanpa perlu scrollbar. Halaman OneWeb perlu skrip
+// pendengar (listener) yang sepasang dengan ini untuk menerima pesannya.
+// ==========================================================================
+(function () {
+  function reportHeight() {
+    var height = document.documentElement.scrollHeight;
+    window.parent.postMessage({ type: "dis-form-resize", height: height }, "*");
+  }
+  window.addEventListener("load", reportHeight);
+  window.addEventListener("resize", reportHeight);
+  if (window.ResizeObserver) {
+    new ResizeObserver(reportHeight).observe(document.body);
+  }
+  reportHeight();
+})();
 </script>
 
 <style>
@@ -256,7 +275,7 @@
   /* ===== HERO ===== */
   #dis-doc-wrapper .dis-hero {
     background: #0f2138;
-    padding: 3rem 1.5rem 2.6rem 1.5rem;
+    padding: 2rem 1.5rem 2rem 1.5rem;
   }
 
   #dis-doc-wrapper .dis-hero-inner {
